@@ -10,7 +10,7 @@ public class Book {
     private int id;
     private String title;
     private String description;
-
+    private int number;
     @ManyToMany
     @JoinTable(
             joinColumns = @JoinColumn(
@@ -45,6 +45,14 @@ public class Book {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public Collection<User> getUsers() {
