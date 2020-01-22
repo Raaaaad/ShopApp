@@ -3,7 +3,7 @@ package rad.shopapp.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import rad.shopapp.Modules.User;
+import rad.shopapp.Models.User;
 import rad.shopapp.Repositories.RoleRepository;
 import rad.shopapp.Repositories.UserRepository;
 

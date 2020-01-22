@@ -5,8 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import rad.shopapp.Modules.CustomUserDetails;
-import rad.shopapp.Modules.User;
+import rad.shopapp.Models.CustomUserDetails;
+import rad.shopapp.Models.User;
 import rad.shopapp.Repositories.UserRepository;
 
 @Service

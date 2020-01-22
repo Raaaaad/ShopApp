@@ -1,4 +1,4 @@
-package rad.shopapp.Modules;
+package rad.shopapp.Models;
 
 import javax.persistence.*;
 import java.util.Collection;
