@@ -1,6 +1,7 @@
 package rad.shopapp.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -14,7 +15,11 @@ import rad.shopapp.Jwt.JwtUtil;
 import rad.shopapp.Models.AuthenticationRequest;
 import rad.shopapp.Models.AuthenticationResponse;
 import rad.shopapp.Models.CustomUserDetails;
+import rad.shopapp.Models.User;
+import rad.shopapp.Repositories.UserRepository;
 import rad.shopapp.Services.CustomUserDetailsService;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class MainController {
@@ -27,9 +32,20 @@ public class MainController {
     @Autowired
     private JwtUtil jwtTokenUtil;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @RequestMapping(value = "/hi", method = RequestMethod.GET)
-    public String Hi(){
-        return "Hi";
+    public String Hi(HttpServletRequest httpRequest){
+        final String authorizationHeader = httpRequest.getHeader("Authorization");
+        String jwt = null;
+        String email = null;
+        if(authorizationHeader!=null){
+            jwt = authorizationHeader;
+            email = jwtTokenUtil.extractEmail(jwt);
+        }
+        User user = userRepository.findByEmail(email);
+        return "Hi " + user.getFirstName() + " " + user.getLastName();
     }
 
 
