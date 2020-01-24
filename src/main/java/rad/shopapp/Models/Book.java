@@ -20,6 +20,9 @@ public class Book {
             )
     private Collection<User> users;
 
+    @ManyToMany(mappedBy = "books")
+    private Collection<Author> authors;
+
     public Book() {
     }
 
@@ -61,5 +64,13 @@ public class Book {
 
     public void setUsers(Collection<User> users) {
         this.users = users;
+    }
+
+    public Collection<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Collection<Author> authors) {
+        this.authors = authors;
     }
 }
