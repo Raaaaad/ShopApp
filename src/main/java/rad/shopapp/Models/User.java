@@ -28,7 +28,7 @@ public class User {
     @ManyToMany(mappedBy = "users")
     private Collection<Book> books;
 
-    @ManyToMany(mappedBy = "users")
+    @OneToMany(mappedBy="user")
     private Collection<Comment> comments;
 
     public User() {

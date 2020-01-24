@@ -15,14 +15,9 @@ public class Comment {
     private String body;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate additionDate;
-    @ManyToMany
-    @JoinTable(
-            joinColumns = @JoinColumn(
-                    name = "comment_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id")
-    )
-    private Collection<User> users;
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
+    private User user;
 
     public int getId() {
         return id;
@@ -48,11 +43,11 @@ public class Comment {
         this.additionDate = additionDate;
     }
 
-    public Collection<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Collection<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
