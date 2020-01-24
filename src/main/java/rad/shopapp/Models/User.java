@@ -28,6 +28,9 @@ public class User {
     @ManyToMany(mappedBy = "users")
     private Collection<Book> books;
 
+    @ManyToMany(mappedBy = "users")
+    private Collection<Comment> comments;
+
     public User() {
     }
 
