@@ -1,5 +1,7 @@
 package rad.shopapp.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -14,8 +16,8 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
-    private boolean isActive;
-    @ManyToMany
+    private boolean active;
+    @ManyToMany(fetch = FetchType.EAGER)//fetch for lazy problem
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(
@@ -75,11 +77,19 @@ public class User {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
+    }
+
+    public Collection<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Collection<Comment> comments) {
+        this.comments = comments;
     }
 
     public Collection<Role> getRoles() {

@@ -1,5 +1,7 @@
 package rad.shopapp.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -11,6 +13,7 @@ public class Role {
 
     private String name;
     @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
     private Collection<User> users;
     @ManyToMany
     @JoinTable(
@@ -23,6 +26,9 @@ public class Role {
     private Collection<Privilege> privileges;
 
     public Role() {
+    }
+    public Role(String name){
+        this.name = name;
     }
 
     public int getId() {

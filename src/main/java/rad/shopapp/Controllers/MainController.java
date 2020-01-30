@@ -20,6 +20,7 @@ import rad.shopapp.Repositories.UserRepository;
 import rad.shopapp.Services.CustomUserDetailsService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 public class MainController {
@@ -46,6 +47,19 @@ public class MainController {
         }
         User user = userRepository.findByEmail(email);
         return "Hi " + user.getFirstName() + " " + user.getLastName();
+    }
+    @RequestMapping(value = "/hi/user", method = RequestMethod.GET)
+    public String HiUser(){
+        return "Hi user";
+    }
+    @RequestMapping(value = "/hi/hi")
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
+
+    @RequestMapping(value = "/hi/admin", method = RequestMethod.GET)
+    public String HiAdmin(){
+        return "Hi admin";
     }
 
 

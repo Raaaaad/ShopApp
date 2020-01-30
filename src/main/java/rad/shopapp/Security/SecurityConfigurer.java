@@ -2,6 +2,7 @@ package rad.shopapp.Security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -31,6 +32,11 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests().antMatchers("/register").permitAll()
                 .antMatchers("/authenticate").permitAll()
+                .antMatchers("/book/{title}").permitAll()
+                .antMatchers("/hi/hi").permitAll()
+                .antMatchers(HttpMethod.POST, "/books").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/hi/user").hasAnyRole("ADMIN","USER")
+                .antMatchers(HttpMethod.GET, "/hi/admin").hasAnyRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
