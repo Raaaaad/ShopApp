@@ -5,12 +5,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import rad.shopapp.Models.Privilege;
-import rad.shopapp.Models.Role;
-import rad.shopapp.Models.User;
-import rad.shopapp.Repositories.PrivilegeRepository;
-import rad.shopapp.Repositories.RoleRepository;
-import rad.shopapp.Repositories.UserRepository;
+import rad.shopapp.Models.*;
+import rad.shopapp.Repositories.*;
 
 import javax.transaction.Transactional;
 import java.util.Arrays;
@@ -29,6 +25,12 @@ public class FirstDataLoader implements ApplicationListener<ContextRefreshedEven
 
     @Autowired
     private PrivilegeRepository privilegeRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
+
+    @Autowired
+    private AuthorRepository authorRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -56,6 +58,22 @@ public class FirstDataLoader implements ApplicationListener<ContextRefreshedEven
         user.setRoles(Arrays.asList(adminRole));
         user.setActive(true);
         userRepository.save(user);
+
+        Book book = new Book();
+        book.setTitle("Faraon");
+        book.setDescription("Egypt");
+        book.setNumber(10);
+
+        Author author = new Author();
+        author.setFirstName("Boleslaw");
+        author.setLastName("Prus");
+
+        book.setAuthors(Arrays.asList(author));
+        author.setBooks(Arrays.asList(book));
+
+        bookRepository.save(book);
+        authorRepository.save(author);
+
 
         alreadySetup = true;
     }
