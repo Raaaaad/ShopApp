@@ -18,7 +18,7 @@ public class BookController {
     }
 
     @RequestMapping(value = "/book/{title}", method = RequestMethod.POST)
-    public Book AddToRead(@PathVariable String title, HttpServletRequest httpRequest){
+    public Book AddToRead(@PathVariable String title, HttpServletRequest httpRequest) throws Exception{
         return bookService.AddToRead(title, httpRequest);
     }
 }

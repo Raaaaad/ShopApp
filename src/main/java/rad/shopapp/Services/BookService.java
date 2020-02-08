@@ -31,16 +31,16 @@ public class BookService {
         return bookRepository.findByTitle(title);
     }
 
-    public Book AddToRead(String title, HttpServletRequest httpServletRequest){
+    public Book AddToRead(String title, HttpServletRequest httpServletRequest) throws Exception{
         String authorizationHeader = httpServletRequest.getHeader("Authorization");
         if(authorizationHeader==null)
-            return null;
+            throw new Exception("No token!");
         String jwt = authorizationHeader;
         String email = jwtTokenUtil.extractEmail(jwt);
         User user = userRepository.findByEmail(email);
         Book book = bookRepository.findByTitle(title);
         if(user.getBooks().contains(book))
-            return null;
+           throw new Exception("User has that book!");
         Collection<Book> books = user.getBooks();
         books.add(book);
 

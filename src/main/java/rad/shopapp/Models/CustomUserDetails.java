@@ -9,13 +9,13 @@ import java.util.Collection;
 import java.util.List;
 
 public class CustomUserDetails implements UserDetails {
-    private String userName;
+    private String email;
     private String password;
     private boolean active;
     private Collection<GrantedAuthority> authorities = new ArrayList<>();
 
     public CustomUserDetails(User user){
-        this.userName = user.getEmail();
+        this.email = user.getEmail();
         this.password = user.getPassword();
         this.active =user.isActive();
         authorities = getAuthorities(user.getRoles());
@@ -33,7 +33,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return email;
     }
 
     @Override
