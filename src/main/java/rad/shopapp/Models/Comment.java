@@ -19,6 +19,10 @@ public class Comment {
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name="book_id", nullable=false)
+    private Book book;
+
     public int getId() {
         return id;
     }
@@ -49,5 +53,13 @@ public class Comment {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 }

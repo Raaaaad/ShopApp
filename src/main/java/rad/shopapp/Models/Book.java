@@ -23,6 +23,9 @@ public class Book {
     @ManyToMany(mappedBy = "books")
     private Collection<Author> authors;
 
+    @OneToMany(mappedBy="book")
+    private Collection<Comment> comments;
+
     public Book() {
     }
 
@@ -72,5 +75,13 @@ public class Book {
 
     public void setAuthors(Collection<Author> authors) {
         this.authors = authors;
+    }
+
+    public Collection<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Collection<Comment> comments) {
+        this.comments = comments;
     }
 }
